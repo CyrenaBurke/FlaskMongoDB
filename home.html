@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+</head>
+<body>
+    <h1>Notes</h1>
+    <ul>
+        {% for note in notes %}
+            <li>
+                <strong>{{ note['cwid'] }} - {{ note['name'] }}</strong><br>
+                <a href="{{ url_for('delete_note', note_id=note['_id']) }}" style="color: rgb(127, 48, 191);">Delete</a>
+            </li>
+        {% else %}
+            <li>No notes found.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add a New Note</h2>
+    <form action="{{ url_for('add_note') }}" method="POST">
+        <label for="cwid">CWID:</label>
+        <input type="text" id="cwid" name="cwid" required><br><br>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <button type="submit">Add Note</button>
+    </form>
+
+    <hr>
+</body>
+</html>
